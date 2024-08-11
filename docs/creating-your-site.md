@@ -37,13 +37,22 @@ This will create the following structure:
 
 ### Minimal configuration
 
-Simply add the following lines to `mkdocs.yml` to enable the theme:
+Simply set the `site_name` and add the following lines to `mkdocs.yml` to enable the theme:
 
-``` yaml
+``` yaml hl_lines="2-5"
+site_name: My site
+site_url: https://mydomain.org/mysite
 theme:
   name: material
 ```
 
+The `site_url` setting is important for a number of reasons.
+By default, MkDocs will assume that your site is hosted at the root of
+your domain. This is not the case, for example, when [publishing to GitHub
+pages] - unless you use a custom domain. Another reason is that some of the
+plugins require the `site_url` to be set, so you should always do this.
+
+  [publishing to GitHub pages]: publishing-your-site.md#github-pages
   [installation methods]: getting-started.md#installation
 
 ???+ tip "Recommended: [configuration validation and auto-complete]"
@@ -154,6 +163,30 @@ technical writing experience.
   [Building for offline usage]: setup/building-for-offline-usage.md
   [Building an optimized site]: setup/building-an-optimized-site.md
   [Markdown extensions]: setup/extensions/index.md
+
+## Templates
+
+If you want to jump start a new project, you can use one of our growing
+collection of templates:
+
+<div class="grid cards" markdown>
+
+-   :octicons-repo-template-24: &nbsp; __[Blog][blog-template]__
+
+    ---
+
+    Create a blog
+
+-   :octicons-repo-template-24: &nbsp; __[Social cards][social-cards-template]__
+
+    ---
+
+    Create documentation with social cards
+
+</div>
+
+[blog-template]: https://github.com/mkdocs-material/create-blog
+[social-cards-template]: https://github.com/mkdocs-material/create-social-cards
 
 ## Previewing as you write
 

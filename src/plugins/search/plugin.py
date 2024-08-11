@@ -75,7 +75,7 @@ class SearchPlugin(BasePlugin[SearchConfig]):
             )
 
         # Retrieve default value for pipeline
-        if not self.config.pipeline:
+        if self.config.pipeline is None:
             self.config.pipeline = list(filter(len, re.split(
                 r"\s*,\s*", self._translate(config, "search.config.pipeline")
             )))
@@ -164,7 +164,7 @@ class SearchIndex:
 
     # Add page to search index
     def add_entry_from_context(self, page):
-        search = page.meta.get("search", {})
+        search = page.meta.get("search") or {}
         if search.get("exclude"):
             return
 
@@ -218,7 +218,7 @@ class SearchIndex:
                     entry["tags"].append(name)
 
         # Set document boost
-        search = page.meta.get("search", {})
+        search = page.meta.get("search") or {}
         if "boost" in search:
             entry["boost"] = search["boost"]
 

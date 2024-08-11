@@ -53,7 +53,8 @@ import {
   getElementSize,
   getElements,
   watchElementContentOffset,
-  watchElementSize
+  watchElementSize,
+  watchElementVisibility
 } from "~/browser"
 import { renderTabbedControl } from "~/templates"
 import { h } from "~/utilities"
@@ -135,7 +136,7 @@ export function mountContentTabs(
   return defer(() => {
     const push$ = new Subject<ContentTabs>()
     const done$ = push$.pipe(ignoreElements(), endWith(true))
-    combineLatest([push$, watchElementSize(el)])
+    combineLatest([push$, watchElementSize(el), watchElementVisibility(el)])
       .pipe(
         takeUntil(done$),
         auditTime(1, animationFrameScheduler)

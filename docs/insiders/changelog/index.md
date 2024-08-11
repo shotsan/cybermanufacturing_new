@@ -2,6 +2,66 @@
 
 ## Material for MkDocs Insiders
 
+### 4.53.12 <small>August 2, 2024</small> { id="4.53.12" }
+
+- Fixed #7410: Instant previews jump on content tabs with anchor links
+- Fixed #7408: Instant previews jump on content tabs
+
+### 4.53.11 <small>May 27, 2024</small> { id="4.53.11" }
+
+- Fixed projects plugin crashing when serving before building subprojects
+
+### 4.53.10 <small>May 20, 2024</small> { id="4.53.10" }
+
+- Fixed projects plugin crashing in serve mode when disabled
+- Fixed projects plugin crashing when building nested projects
+
+### 4.53.9 <small>May 20, 2024</small> { id="4.53.9" }
+
+- Fixed #7191: Tags listings not rendering when `toc_depth` is changed
+
+### 4.53.8 <small>April 26, 2024</small> { id="4.53.8" }
+
+- Fixed #7052: Preview extension automatically including all pages
+- Fixed #7051: Instant previews mounting on footnote references
+- Fixed #5165: Improved tooltips not mounting in sidebar for typeset plugin
+
+### 4.53.7 <small>April 25, 2024</small> { id="4.53.7" }
+
+- Fixed #7060: Incorrect resolution of translation when using static-i18n
+
+### 4.53.6 <small>April 5, 2024</small> { id="4.53.6" }
+
+- Ensure working directory is set for projects when using projects plugin
+- Fixed #6970: Incorrect relative paths in git submodules with projects plugin
+
+### 4.53.5 <small>April 2, 2024</small> { id="4.53.5" }
+
+- Fixed social plugin crashing when no colors are specified in palettes
+
+### 4.53.4 <small>March 31, 2024</small> { id="4.53.4" }
+
+- Fixed #6973: Escaping issue in tags extra files deprecation helper
+
+### 4.53.3 <small>March 23, 2024</small> { id="4.53.3" }
+
+- Added support for font variants in social plugin
+- Improved resilience of font resolution in social plugin
+- Fixed tag listing sometimes not being auto-populated
+- Fixed tag listing scope not being correctly resolved
+- Fixed #6941: Meta plugin adding duplicate entries
+- Fixed #6928: Social plugin crashes for some fonts
+
+### 4.53.2 <small>March 18, 2024</small> { id="4.53.2" }
+
+- Fixed abort on first non-matching configuration in preview extension
+- Fixed #6914: Meta files take precedence over front matter
+
+### 4.53.1 <small>March 6, 2024</small> { id="4.53.1" }
+
+- Fixed #6877: Projects plugin computes incorrect path to assets
+- Fixed #6869: Blog plugin should emit warning on invalid related link
+
 ### 4.53.0 <small>February 24, 2024</small> { id="4.53.0" }
 
 - Added support for automatic instant previews

@@ -21,6 +21,7 @@
  */
 
 import {
+  EMPTY,
   Observable,
   filter,
   finalize,
@@ -32,11 +33,13 @@ import {
   takeUntil
 } from "rxjs"
 
+import { feature } from "~/_"
 import {
+  Viewport,
   getElements,
   watchElementVisibility
 } from "~/browser"
-import { mountTooltip } from "~/components"
+import { mountInlineTooltip2 } from "~/components/tooltip2"
 
 /* ----------------------------------------------------------------------------
  * Helper types
@@ -47,6 +50,7 @@ import { mountTooltip } from "~/components"
  */
 interface PatchOptions {
   document$: Observable<Document>      /* Document observable */
+  viewport$: Observable<Viewport>      /* Viewport observable */
 }
 
 /* ----------------------------------------------------------------------------
@@ -64,7 +68,7 @@ interface PatchOptions {
  * @param options - Options
  */
 export function patchEllipsis(
-  { document$ }: PatchOptions
+  { document$, viewport$ }: PatchOptions
 ): void {
   document$
     .pipe(
@@ -83,8 +87,12 @@ export function patchEllipsis(
         const host = el.closest("a") || el
         host.title = text
 
+        // Do not mount improved tooltip if feature is disabled
+        if (!feature("content.tooltips"))
+          return EMPTY
+
         /* Mount tooltip */
-        return mountTooltip(host)
+        return mountInlineTooltip2(host, { viewport$ })
           .pipe(
             takeUntil(document$.pipe(skip(1))),
             finalize(() => host.removeAttribute("title"))
@@ -94,10 +102,11 @@ export function patchEllipsis(
       .subscribe()
 
   // @todo move this outside of here and fix memleaks
-  document$
-    .pipe(
-      switchMap(() => getElements(".md-status")),
-      mergeMap(el => mountTooltip(el))
-    )
-      .subscribe()
+  if (feature("content.tooltips"))
+    document$
+      .pipe(
+        switchMap(() => getElements(".md-status")),
+        mergeMap(el => mountInlineTooltip2(el, { viewport$ }))
+      )
+        .subscribe()
 }

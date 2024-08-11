@@ -18,7 +18,7 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 
-FROM python:3.11-alpine3.18
+FROM python:3.11-alpine3.19
 
 # Build-time flags
 ARG WITH_PLUGINS=true
@@ -48,10 +48,12 @@ RUN \
     git-fast-import \
     jpeg-dev \
     openssh \
+    tini \
     zlib-dev \
 && \
   apk add --no-cache --virtual .build \
     gcc \
+    g++ \
     libffi-dev \
     musl-dev \
 && \
@@ -96,5 +98,5 @@ WORKDIR /docs
 EXPOSE 8000
 
 # Start development server by default
-ENTRYPOINT ["mkdocs"]
+ENTRYPOINT ["/sbin/tini", "--", "mkdocs"]
 CMD ["serve", "--dev-addr=0.0.0.0:8000"]
